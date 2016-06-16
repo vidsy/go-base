@@ -1,0 +1,17 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - echo "Nothing yet"
+
+test:
+  override:
+    - echo "Nothing yet"
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - echo "Nothing yet"
