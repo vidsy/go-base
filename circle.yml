@@ -4,14 +4,15 @@ machine:
 
 dependencies:
   override:
-    - echo "Nothing yet"
+    - docker build -t vidsyhq/go-base .
 
 test:
   override:
-    - echo "Nothing yet"
+    - echo "Nothing..."
 
 deployment:
   hub:
     branch: master
     commands:
-      - echo "Nothing yet"
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push vidsyhq/go-base
