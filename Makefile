@@ -3,12 +3,6 @@ PATH_BASE = "/go/src/github.com/vidsy"
 REPONAME = "go-base"
 VERSION = $(shell cat ./VERSION)
 
-build-binary:
-	@docker run \
-	-v "${CURDIR}":${PATH_BASE}/${REPONAME} \
-	-w ${PATH_BASE}/${REPONAME} \
-	${GO_BUILDER_IMAGE}
-
 build-image:
 	@docker build -t vidsyhq/${REPONAME} .
 

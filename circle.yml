@@ -9,7 +9,6 @@ machine:
 
 dependencies:
   override:
-    - make build-binary
     - make build-image
 
 test:
