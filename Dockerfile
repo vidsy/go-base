@@ -1,5 +1,5 @@
 FROM alpine:3.7
-LABEL maintainer="Charlie Revett <charlie@vidsy.co>"
+LABEL maintainer="Vidsy <tech@vidsy.co>"
 
 RUN apk --update upgrade openssl && \
     apk add ca-certificates      && \
