@@ -4,7 +4,7 @@ REPONAME = "go-base"
 VERSION = $(shell cat ./VERSION)
 
 build-image:
-	@docker build -t vidsyhq/${REPONAME} .
+	@docker build -t vidsyhq/${REPONAME} --build-arg VERSION=${VERSION} .
 
 check-version:
 	@echo "=> Checking if VERSION exists as Git tag..."
