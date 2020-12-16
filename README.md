@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  Base Docker image for <b>Vidsy.co</b> Go services.
+  Base Docker image for <b>Vidsy.co</b> Go services. Uses sratch as base and adds just what's needed.
 </p>
 
 ## Usage
@@ -18,8 +18,3 @@
 FROM vidsyhq/go-base:latest
 ...
 ```
-- Image uses the [gliderlabs/alpine](https://github.com/gliderlabs/docker-alpine) as it's **base** image.
-
-## Vidsy
-
-The engineering team @ [Vidsy.co](http://brands.vidsy.co) write **Go microservices**, all deployed to AWS in Docker containers.
