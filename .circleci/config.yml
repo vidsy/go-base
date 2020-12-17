@@ -21,7 +21,7 @@ working-directory: &working-directory
   working-directory: /go-base
 
 jobs:
-  deploy:
+  build-image:
     working_directory: /go-base
     docker:
       - image: docker:18.05.0-ce-git
@@ -30,8 +30,8 @@ jobs:
       - setup_remote_docker
       - run: apk update && apk add make
       - run:  make build-image
-  build-image:
-    working_directory: /cli
+  deploy:
+    working_directory: /go-base
     docker:
       - image: docker:18.05.0-ce-git
     steps:
