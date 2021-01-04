@@ -1,6 +1,28 @@
-version: 2
+version: 2.1
+
+orbs:
+  common: vidsy/common@volatile
+  services: vidsy/services@volatile
+
+ignore-master: &ignore-master
+  filters:
+    branches:
+      ignore: master
+
+require-install: &require-install
+  requires:
+    - go/install
+
+tagged-build: &tagged-build
+  tags:
+    only: /[0-9]+\.[0-9]+\.[0-9]+/
+
+working-directory: &working-directory
+  working-directory: /go-base
+
 jobs:
   build-image:
+    working_directory: /go-base
     docker:
       - image: docker:18.05.0-ce-git
     steps:
@@ -8,16 +30,8 @@ jobs:
       - setup_remote_docker
       - run: apk update && apk add make
       - run:  make build-image
-
-  check-version:
-    docker:
-      - image: alpine:latest
-    steps:
-      - checkout
-      - run: apk update && apk add make git
-      - run: make check-version
-
   deploy:
+    working_directory: /go-base
     docker:
       - image: docker:18.05.0-ce-git
     steps:
@@ -28,17 +42,21 @@ jobs:
       - run: make push-to-registry -e CIRCLE_TAG=$CIRCLE_TAG
 
 workflows:
-  version: 2
-  commit:
+  build-test-deploy:
     jobs:
-      - build-image
-      - check-version
+      - common/check-for-clubhouse-ticket-comment:
+          context: org-github-docker-hub
+          <<: *ignore-master
+      - common/check-version:
+          <<: *ignore-master
+      - build-image:
+          <<: *ignore-master
       - deploy:
-          context: org-docker-hub
+          context: org-go-services
+          requires:
+            - build-image
           filters:
+            <<: *tagged-build
             branches:
-              only:
-                - master
-            tags:
-              only:
-                - /[0-9]+\.[0-9]+\.[0-9]+/
+              ignore: /.*/
+

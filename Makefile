@@ -1,5 +1,4 @@
 BRANCH = "master"
-PATH_BASE = "/go/src/github.com/vidsy"
 REPONAME = "go-base"
 VERSION = $(shell cat ./VERSION)
 
