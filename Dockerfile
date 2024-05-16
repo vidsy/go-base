@@ -1,4 +1,4 @@
-FROM alpine:3.8 as builder
+FROM alpine:3.19 as builder
 RUN apk update && apk --update upgrade openssl && apk add --no-cache git ca-certificates && update-ca-certificates
 ENV USER=appuser
 ENV UID=10001
